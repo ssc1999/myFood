@@ -3,17 +3,13 @@ from uuid import UUID
 
 
 def foodEntity(item) -> dict:
-    # for x in entity:
-    #     if x.id == item.id:
-    #         return {
-    #             "id": x["id"],
-    #             "name": x["name"],
-    #             "calories": x["calories"]
-    #         }
     return {
         "id": str(item["_id"]),
         "name": item["name"],
-        "calories": int(item["calories"])
+        "calories": float(item["calories"]),
+        "carbs": float(item["carbs"]),
+        "fats": float(item["fats"]),
+        "proteins": float(item["proteins"])
     }
 
 

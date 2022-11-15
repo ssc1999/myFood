@@ -6,4 +6,7 @@ from pydantic import BaseModel
 
 class Food(BaseModel):
     name: str
-    calories: int
+    calories: float
+    carbs: float
+    fats: float
+    proteins: float

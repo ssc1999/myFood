@@ -1,7 +1,7 @@
 from http.client import HTTPException
 from typing import List
 from uuid import UUID, uuid4
-from fastapi import APIRouter
+from fastapi import APIRouter, Query
 
 from models.food import Food
 from schemas.food import foodEntity, foodListEntity
@@ -16,6 +16,11 @@ async def find_all_food():
     print(conn.myfood.food.find())
     print(foodListEntity(conn.myfood.food.find()))
     return foodListEntity(conn.myfood.food.find())
+
+
+@food.get("/food/search/", tags=["Food"])
+async def search_food(name: str):
+    return foodListEntity(conn.myfood.food.find({"name": name}))
 
 
 @food.get("/food/{id}", tags=["Food"])

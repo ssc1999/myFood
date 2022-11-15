@@ -19,4 +19,4 @@ async def check_calories(calories: Calories):
         total = 66 + (13.7 * calories.weight) + \
             (5 * calories.height) - (6.5 * calories.age)
 
-    return total
+    return {"total": total}
