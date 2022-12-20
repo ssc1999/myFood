@@ -14,7 +14,6 @@ mongoose.connect("mongodb://localhost:27017/myfood", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });
-// link;
 
 const app = express();
 app.use("/", express.static(path.join(__dirname, "static")));
@@ -102,6 +101,42 @@ app.post("/register", async (req, res) => {
     }
 
     res.json({ status: "ok" });
+});
+
+app.post("/change-password", async (req, res) => {
+    const { token, newpassword: plainTextPassword } = req.body;
+
+    if (!plainTextPassword || typeof plainTextPassword !== "string") {
+        return res.json({
+            status: "error",
+            error: "Invalid password",
+        });
+    }
+    if (plainTextPassword.length < 5) {
+        return res.json({
+            status: "error",
+            error: "Password too small. At least 5 characters required",
+        });
+    }
+
+    try {
+        const user = jwt.verify(token, JWT_SECRET);
+
+        const _id = user.id;
+        const password = await bcrypt.hash(plainTextPassword, 10);
+
+        await User.updateOne(
+            { _id },
+            {
+                $set: { password: password },
+            }
+        );
+
+        console.log("JWT decoded: ", user);
+        res.json({ status: "ok" });
+    } catch (error) {
+        res.json({ status: "error", error: "Invalid token" });
+    }
 });
 
 app.listen(5000, () => {
