@@ -4,14 +4,58 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const User = require("./models/user");
 const bcrypt = require("bcrypt");
+const { json } = require("body-parser");
+const jwt = require("jsonwebtoken");
+
+const JWT_SECRET = "lksjdafos;dh#@$!@%HAWHDNF";
 
 mongoose.set("strictQuery", true);
-mongoose.connect("mongodb://localhost:27017/myfood");
-link;
+mongoose.connect("mongodb://localhost:27017/myfood", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+});
+// link;
 
 const app = express();
 app.use("/", express.static(path.join(__dirname, "static")));
 app.use(bodyParser.json());
+
+app.post("/login", async (req, res) => {
+    const { username, password } = req.body;
+
+    // .lean() so that mongoose return a simple json with the username and password
+    const user = await User.findOne({ username }).lean();
+
+    if (!user) {
+        return res.json({
+            status: "error",
+            error: "Invalid username or password",
+        });
+    }
+
+    // if the hashes are the same its fine
+    if (await bcrypt.compare(password, user.password)) {
+        // the combination is successful
+
+        const token = jwt.sign(
+            {
+                id: user._id,
+                username: user.username,
+            },
+            JWT_SECRET
+        );
+
+        return res.json({
+            status: "ok",
+            data: token,
+        });
+    }
+
+    res.json({
+        status: "error",
+        error: "Invalid username or password",
+    });
+});
 
 app.post("/register", async (req, res) => {
     console.log(req.body);
