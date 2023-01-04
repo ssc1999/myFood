@@ -1,0 +1,6 @@
+{
+    "watch": "./**/**.py",
+    "ext": "py",
+    "exec": "uvicorn main:app",
+    "ignore": "__**"
+}
