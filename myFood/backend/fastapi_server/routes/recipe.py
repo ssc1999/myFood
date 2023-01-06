@@ -11,7 +11,7 @@ from bson import ObjectId
 recipe = APIRouter()
 
 
-@recipe.get("/recipe", tags=["Recipe"])
+@recipe.get("/recipes", tags=["Recipe"])
 async def find_all_recipe():
     print(conn.myfood.recipe.find())
     print(recipeListEntity(conn.myfood.recipe.find()))
@@ -24,7 +24,7 @@ async def get_recipe(id):
     return recipeEntity(conn.myfood.recipe.find_one({"_id": ObjectId(id)}))
 
 
-@recipe.post("/recipe", tags=["Recipe"])
+@recipe.post("/recipes", tags=["Recipe"])
 async def add_recipe(recipe: Recipe):
     conn.myfood.recipe.insert_one(dict(recipe))
     return "Added recipe: " + recipe.tittle
