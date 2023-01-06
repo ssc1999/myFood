@@ -20,6 +20,7 @@ async def find_all_recipe():
 
 @recipe.get("/recipe/{id}", tags=["Recipe"])
 async def get_recipe(id):
+    print(recipeEntity(conn.myfood.recipe.find_one({"_id": ObjectId(id)})))
     return recipeEntity(conn.myfood.recipe.find_one({"_id": ObjectId(id)}))
 
 

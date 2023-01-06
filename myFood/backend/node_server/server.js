@@ -19,7 +19,10 @@ const app = express();
 app.use("/", express.static(path.join(__dirname, "static")));
 app.use(bodyParser.json());
 
-app.post("/login", async (req, res) => {
+const defaultHandler = () => {
+    console.log("Server started on PORT 5000");
+};
+const loginHandler = async (req, res) => {
     const { username, password } = req.body;
 
     // .lean() so that mongoose return a simple json with the username and password
@@ -55,9 +58,8 @@ app.post("/login", async (req, res) => {
         status: "error",
         error: "Invalid username or password",
     });
-});
-
-app.post("/register", async (req, res) => {
+};
+const registerHandler = async (req, res) => {
     console.log(req.body);
 
     //the body return to the server a json with {username: x, password: y}
@@ -102,9 +104,8 @@ app.post("/register", async (req, res) => {
     }
 
     res.json({ status: "ok" });
-});
-
-app.post("/change-password", async (req, res) => {
+};
+const changePasswordHandler = async (req, res) => {
     const { token, newpassword: plainTextPassword } = req.body;
 
     if (!plainTextPassword || typeof plainTextPassword !== "string") {
@@ -138,8 +139,13 @@ app.post("/change-password", async (req, res) => {
     } catch (error) {
         res.json({ status: "error", error: "Invalid token" });
     }
-});
+};
 
-app.listen(5000, () => {
-    console.log("Server started on PORT 5000");
-});
+// post login
+app.post("/login", loginHandler);
+// post register
+app.post("/register", registerHandler);
+// post change-password
+app.post("/change-password", changePasswordHandler);
+// listen as default
+app.listen(5000, defaultHandler);

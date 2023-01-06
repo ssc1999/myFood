@@ -1,3 +1,4 @@
+const { response } = require("express");
 var express = require("express");
 var router = express.Router();
 const apiAdapter = require("../routers/apiAdapter");
@@ -9,18 +10,18 @@ const api = apiAdapter(BASE_URL);
 const recipesGetHandler = (req, res) => {
     // console.log(req.path);
     api.get(req.path).then((resp) => {
-        console.log(JSON.stringify(resp.data, null, 4));
-        console.log(resp.data.length);
-        // res.send(resp.body);
+        console.log(resp.body);
+        //console.log(JSON.stringify(resp.data, null, 4));
+        console.log("lol");
+        resp.body;
     });
 };
 
 // have to do
 const recipeGetHandler = (req, res) => {
-    // console.log(req.path);
     api.get(req.path).then((resp) => {
-        console.log(JSON.stringify(resp.data, null, 4));
-        console.log(resp.data.length);
+        console.log(req.path);
+        console.log("lol");
         // res.send(resp.body);
     });
 };
