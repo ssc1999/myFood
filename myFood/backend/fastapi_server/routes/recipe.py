@@ -34,7 +34,3 @@ async def add_recipe(recipe: Recipe):
 async def delete_recipe(id):
     conn.myfood.recipe.find_one_and_delete({"_id": ObjectId(id)})
     return "Deleted recipe with id: " + id
-    # raise HTTPException(
-    #     status_code=406,
-    #     detail=f"food with id:{id} does not exists"
-    # )

@@ -5,7 +5,7 @@ from uuid import UUID
 def foodEntity(item) -> dict:
     return {
         "id": str(item["_id"]),
-        "name": item["name"],
+        "name": str(item["name"]),
         "calories": float(item["calories"]),
         "carbs": float(item["carbs"]),
         "fats": float(item["fats"]),
