@@ -11,9 +11,11 @@ router.use((req, res, next) => {
     next();
 });
 
-router.use(caloriesService);
-router.use(foodService);
+// recipeService();
+
+// router.use(caloriesService);
+// router.use(foodService);
 router.use(recipeService);
-router.use(userService);
+// router.use(userService);
 
 module.exports = router;

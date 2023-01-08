@@ -2,51 +2,80 @@ const { response } = require("express");
 var express = require("express");
 var router = express.Router();
 const apiAdapter = require("../routers/apiAdapter");
+const paths = require("./paths");
 
 const BASE_URL = "http://127.0.0.1:8000";
 const api = apiAdapter(BASE_URL);
 
-// done
-const recipesGetHandler = (req, res) => {
-    // console.log(req.path);
-    api.get(req.path).then((resp) => {
-        console.log(resp.body);
-        //console.log(JSON.stringify(resp.data, null, 4));
-        console.log("lol");
-        resp.body;
-    });
-};
+// connects with fastapi
+// const makeHandler = (method, callback) => (routerRequest, routerResponse) => {
+//     api[method](routerRequest.path).then((fastApiResponse) => {
+//         callback({ routerRequest, routerResponse, fastApiResponse });
+//     });
+// };
 
-// have to do
-const recipeGetHandler = (req, res) => {
-    api.get(req.path).then((resp) => {
-        console.log(req.path);
-        console.log("lol");
-        // res.send(resp.body);
-    });
-};
+// // creates the router with the method, url and parameters
+// const on = (method, path, callback) => {
+//     router[method](path, makeHandler(method, callback));
+// };
 
-// have to do
-const recipePostHandler = (req, res) => {
-    api.get(req.path).then((resp) => {
-        res.send(resp.data);
-    });
-};
+// // data = { routerRequest, routerResponse, fastApiResponse }
 
-// have to do
-const recipeDeleteHandler = (req, res) => {
-    api.get(req.path).then((resp) => {
-        res.send(resp.data);
-    });
-};
+// const returnAllRecipes = (data) => {
+//     console.log("lol");
+//     console.log(data.fastApiRespone.body);
+//     // console.log(data.fastApiRespone.body);
+//     // console.log(data.fastApiRespone.data);
+//     // data.routerResponse.send(data.fastApiResponse);
+// };
+
+// const returnRecipeById = (data) => {};
+
+// const postRecipe = (data) => {};
+
+// const deleteRecipeById = (data) => {};
+
+// const initRecipeService = () => {
+//     router.use(() => on("get", paths.allRecipes, returnAllRecipes));
+//     router.use(() => on("get", paths.recipeById, returnRecipeById));
+//     router.use(() => on("post", paths.allRecipes, postRecipe));
+//     router.use(() => on("delete", paths.recipeById, deleteRecipeById));
+// };
+
+// router.get(paths.allRecipes, makeHandler("get", returnAllRecipes));
 
 // get all recipes
-router.get("/recipe", recipesGetHandler);
-// get a recipe
-router.get("/recipe/{id}", recipeGetHandler);
+router.get("/recipes", (routerRequest, routerResponse) => {
+    api.get(routerRequest.path).then((fastApiResponse) => {
+        routerResponse.send(fastApiResponse.data);
+    });
+});
+
+// get a recipe by id
+router.get("/recipe/*", (routerRequest, routerResponse) => {
+    console.log(routerRequest.path);
+    api.get(routerRequest.path).then((fastApiResponse) => {
+        console.log(fastApiResponse.data);
+        routerResponse.send(fastApiResponse.data);
+    });
+});
+
 // post a recipe
-router.post("/recipe", recipePostHandler);
-// delete a recipe
-router.delete("/recipe/{id}", recipeDeleteHandler);
+router.post("/recipes", (routerRequest, routerResponse) => {
+    console.log(routerRequest.body);
+    api.post(routerRequest.path, routerRequest.body).then((fastApiResponse) => {
+        console.log(fastApiResponse.data);
+        routerResponse.send(fastApiResponse.data);
+    });
+});
+
+// delete a recipe by id
+router.delete("/recipe/*", (routerRequest, routerResponse) => {
+    console.log(routerRequest.path);
+    api.get(routerRequest.path).then((fastApiResponse) => {
+        console.log(fastApiResponse.data);
+        routerResponse.send(fastApiResponse.data);
+    });
+});
 
 module.exports = router;
