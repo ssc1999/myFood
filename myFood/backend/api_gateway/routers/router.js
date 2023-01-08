@@ -14,7 +14,7 @@ router.use((req, res, next) => {
 // recipeService();
 
 // router.use(caloriesService);
-// router.use(foodService);
+router.use(foodService);
 router.use(recipeService);
 // router.use(userService);
 

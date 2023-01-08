@@ -3,7 +3,6 @@ var express = require("express");
 var router = express.Router();
 const apiAdapter = require("../routers/apiAdapter");
 const paths = require("./paths");
-
 const BASE_URL = "http://127.0.0.1:8000";
 const api = apiAdapter(BASE_URL);
 
