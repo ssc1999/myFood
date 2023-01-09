@@ -22,6 +22,7 @@ app.use(bodyParser.json());
 const defaultHandler = () => {
     console.log("Server started on PORT 5000");
 };
+
 const loginHandler = async (req, res) => {
     const { username, password } = req.body;
 
@@ -37,20 +38,12 @@ const loginHandler = async (req, res) => {
 
     const areEqualPasswords = await bcrypt.compare(password, user.password);
     // if the hashes are the same its fine
+
     if (areEqualPasswords) {
-        // the combination is successful
-
-        const token = jwt.sign(
-            {
-                id: user._id,
-                username: user.username,
-            },
-            JWT_SECRET
-        );
-
         return res.json({
             status: "ok",
-            data: token,
+            user_id: user._id,
+            username: user.username,
         });
     }
 
@@ -59,6 +52,7 @@ const loginHandler = async (req, res) => {
         error: "Invalid username or password",
     });
 };
+
 const registerHandler = async (req, res) => {
     console.log(req.body);
 
@@ -105,8 +99,9 @@ const registerHandler = async (req, res) => {
 
     res.json({ status: "ok" });
 };
+
 const changePasswordHandler = async (req, res) => {
-    const { token, newpassword: plainTextPassword } = req.body;
+    const { token, newPassword: plainTextPassword } = req.body;
 
     if (!plainTextPassword || typeof plainTextPassword !== "string") {
         return res.json({
