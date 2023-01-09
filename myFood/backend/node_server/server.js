@@ -55,7 +55,7 @@ const loginHandler = async (req, res) => {
 
 const registerHandler = async (req, res) => {
     console.log(req.body);
-
+    6;
     //the body return to the server a json with {username: x, password: y}
     //i save the password value from the json in plainTextPassword
     const { username, password: plainTextPassword } = req.body;
@@ -101,35 +101,17 @@ const registerHandler = async (req, res) => {
 };
 
 const changePasswordHandler = async (req, res) => {
-    const { token, newPassword: plainTextPassword } = req.body;
-
-    if (!plainTextPassword || typeof plainTextPassword !== "string") {
-        return res.json({
-            status: "error",
-            error: "Invalid password",
-        });
-    }
-    if (plainTextPassword.length < 5) {
-        return res.json({
-            status: "error",
-            error: "Password too small. At least 5 characters required",
-        });
-    }
-
     try {
-        const user = jwt.verify(token, JWT_SECRET);
-
-        const _id = user.id;
-        const password = await bcrypt.hash(plainTextPassword, 10);
-
+        console.log(req.body);
+        const _id = req.body.id;
+        const password = await bcrypt.hash(req.body.password, 10);
+        console.log(_id, password);
         await User.updateOne(
             { _id },
             {
                 $set: { password: password },
             }
         );
-
-        console.log("JWT decoded: ", user);
         res.json({ status: "ok" });
     } catch (error) {
         res.json({ status: "error", error: "Invalid token" });

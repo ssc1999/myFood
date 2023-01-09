@@ -54,18 +54,41 @@ router.post("/login", (routerRequest, routerResponse) => {
 //     });
 // });
 
-// // change password
-// router.post("/change-password", (routerRequest, routerResponse) => {
-//     console.log(routerRequest.body);
-//     api.post(routerRequest.path, routerRequest.body).then((fastApiResponse) => {
-//         console.log(fastApiResponse.data);
-//         routerResponse.send(fastApiResponse.data);
-//     });
-// });
+// change password
+router.post("/change-password", (routerRequest, routerResponse) => {
+    const { token, newPassword: plainTextPassword } = routerRequest.body;
 
-// const detokenize = (token) => {
-//     user = jwt.decode(token);
-//     return user;
-// };
+    if (!plainTextPassword || typeof plainTextPassword !== "string") {
+        routerResponse.send({
+            status: "error",
+            error: "Invalid password",
+        });
+    }
+    if (plainTextPassword.length < 5) {
+        routerResponse.send({
+            status: "error",
+            error: "Password too small. At least 5 characters required",
+        });
+    }
+
+    try {
+        const user = jwt.verify(token, JWT_SECRET);
+        user.password = plainTextPassword;
+
+        console.log("JWT decoded: ", user);
+
+        api.post(routerRequest.path, user).then((fastApiResponse) => {
+            console.log(fastApiResponse.data);
+            routerResponse.send(fastApiResponse.data);
+        });
+    } catch (error) {
+        routerResponse.send({ status: "error", error: "Invalid token" });
+    }
+});
+
+const detokenize = (token) => {
+    user = jwt.verify(token, JWT_SECRET);
+    return user;
+};
 
 module.exports = router;
