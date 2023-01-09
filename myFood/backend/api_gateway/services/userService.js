@@ -26,8 +26,6 @@ const defaultHandler = () => {
 router.post("/login", (routerRequest, routerResponse) => {
     api.post(routerRequest.path, routerRequest.body).then((fastApiResponse) => {
         if (fastApiResponse.data.status === "ok") {
-            // the combination is successful
-
             const token = jwt.sign(
                 {
                     id: fastApiResponse.data.user_id,
@@ -45,14 +43,12 @@ router.post("/login", (routerRequest, routerResponse) => {
     });
 });
 
-// // register
-// router.post("/register", (routerRequest, routerResponse) => {
-//     console.log(routerRequest.body);
-//     api.post(routerRequest.path, routerRequest.body).then((fastApiResponse) => {
-//         console.log(fastApiResponse.data);
-//         routerResponse.send(fastApiResponse.data);
-//     });
-// });
+// register
+router.post("/register", (routerRequest, routerResponse) => {
+    api.post(routerRequest.path, routerRequest.body).then((fastApiResponse) => {
+        routerResponse.send(fastApiResponse.data);
+    });
+});
 
 // change password
 router.post("/change-password", (routerRequest, routerResponse) => {

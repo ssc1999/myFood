@@ -54,10 +54,6 @@ const loginHandler = async (req, res) => {
 };
 
 const registerHandler = async (req, res) => {
-    console.log(req.body);
-    6;
-    //the body return to the server a json with {username: x, password: y}
-    //i save the password value from the json in plainTextPassword
     const { username, password: plainTextPassword } = req.body;
 
     if (!username || typeof username !== "string") {
