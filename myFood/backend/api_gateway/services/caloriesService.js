@@ -15,3 +15,5 @@ router.post("/calories", (routerRequest, routerResponse) => {
         routerResponse.send(fastApiResponse.data);
     });
 });
+
+module.exports = router;
