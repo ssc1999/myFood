@@ -240,6 +240,23 @@ iframe {
   background: #b60000;
 }
 
+.change-password-form{
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.change-password-form button{
+  border-radius: 10px;
+  padding: 10px;
+  border: 2px black solid;
+  background: #01d62f;
+}
+
+.change-password-form button:hover {
+  background: #11ff00;
+}
+
 .result{
   display: flex;
   flex-direction: row;
@@ -251,6 +268,11 @@ iframe {
   display: flex;
   flex-direction: row;
   gap: 15px;
+  justify-content: space-between;
+}
+
+#sex-radio{
+  justify-content: space-evenly;
 }
 
 .form-line label{
