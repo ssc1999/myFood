@@ -202,6 +202,61 @@ iframe {
 
 }
 
+.white-box {
+  max-width: 700px;
+  max-height: 700px;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: column;
+  /* flex-wrap: wrap; */
+  justify-content: space-between;
+  padding: 250px;
+  gap: 100px;
+
+}
+
+
+
+.imc-form{
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.imc-form button{
+  border-radius: 10px;
+
+  background: #f90057;
+}
+
+.imc-form button:hover {
+  background: #b60000;
+}
+
+.result{
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  margin-top: -50px;
+}
+
+.form-line{
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+}
+
+.form-line label{
+  margin-bottom: 0px;
+}
+
 .index-box{
   width: 230px;
   background: #fff;
@@ -228,6 +283,15 @@ iframe {
   font-family: Montserrat-Bold;
 }
 
+.container-index h2{
+  display: flex;
+  font-style: initial;
+  font-size: 250%;
+  position: fixed;
+  margin-top: -120px;
+  font-family: Montserrat-Bold;
+}
+
 .index-main-btn{
   display: flex;
   flex-direction: column;
@@ -238,6 +302,22 @@ iframe {
   display: flex;
   flex-direction: row;
   gap: 200px;
+}
+
+.white-box .index-down-btn{
+  margin-top: -50px;
+  margin-left: -500px;
+}
+
+.white-box .index-down-btn .down-btn{
+  padding: 10px 10px 10px 10px;
+}
+
+.result{
+  padding: 10px 10px 10px 10px;
+  border: 4px black solid;
+  background: rgb(0, 255, 13);
+  border-radius: 10px;
 }
 
 .main-btn {

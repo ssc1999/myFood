@@ -19,16 +19,41 @@
 <body>
 	<div class="limiter">
 		<div class="container-index">
-            <div class="index">
-                <h1>myFood</h1>
-                <div class="index-main-btn">
-                    <button class="main-btn">IMC</button>
-                    <button class="main-btn">Food</button>
-                    <button class="main-btn">Recipes</button>
-                </div>
+            <div class="white-box">
+                <h2>Calculate your IMC!</h2>
+				<form class="imc-form">
+					<div class="form-line">
+						<label>Height:</label>
+						<input type="text" id="height" placeholder="cm" class="box"/>
+					</div>
+					<div class="form-line">
+						<label>Weight:</label>
+						<input type="text" id="weight" placeholder="kg" class="box"/>
+					</div>
+					<div class="form-line">
+						<label>Age:</label>
+						<input type="text" id="age" placeholder="" class="box"/>
+					</div>
+					<div class="form-line">
+						<div>
+							<input type="radio" id="huey" name="sex" value="male"
+									checked>
+							<label for="male">Male</label>
+						</div>
+						<div>
+							<input type="radio" id="huey" name="sex" value="female"
+									checked>
+							<label for="female">Female</label>
+						</div>
+					</div>
+					<button type="submit" value="Submit" />Calculate</button>
+				</form>
+				<div class="result">
+					<h3>15.4</h3>
+					<h3 id="type">Moderate</h3>
+				</div>
                 <div class="index-down-btn">
-                    <button class="down-btn">Log Out</button>
-                    <button class="down-btn">Change Password</button>
+                    <button class="down-btn">Go Back</button>
                 </div>
             </div>
 		</div>
