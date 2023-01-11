@@ -45,8 +45,10 @@ router.post("/login", (routerRequest, routerResponse) => {
 
 // register
 router.post("/register", (routerRequest, routerResponse) => {
+    console.log("register")
     api.post(routerRequest.path, routerRequest.body).then((fastApiResponse) => {
         routerResponse.send(fastApiResponse.data);
+        console.log(fastApiResponse.data)
     });
 });
 
