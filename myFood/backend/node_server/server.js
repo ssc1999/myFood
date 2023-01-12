@@ -119,17 +119,38 @@ const registrationHandler = async (req, res) => {
 
 const changePasswordHandler = async (req, res) => {
 
-    console.log(req.body);
+    console.log('server.js primer logger', req.body);
     const _id = req.body.id;
+    
+    // console.log(_id, password);
+
+    const validatePassword = (candidatePassword) => candidatePassword.length > 8 && candidatePassword.match(/(\!|@|#|\$|%|\^|&|\*)/g)
+
+    if (!validatePassword(req.body.password)) {
+        return res.json({
+            status: "error",
+            error: {
+                message: "Password not long enough or doesn't include special characters.",
+                code: 1
+            },
+        });
+    }
     const password = await bcrypt.hash(req.body.password, 10);
-    console.log(_id, password);
+
     const response = await User.updateOne(
         { _id },
         {
             $set: { password: password },
         }
     ).then(res => ({ status: "ok" })
-    ).catch(error => ({ status: "error", error: "Invalid token" }));
+    ).catch(error => ({ status: "error", error: {
+                    message: "Invalid token",
+                    code: 2
+    }
+    }));
+    const data = await response;
+    console.log({ data });
+    res.json(data)
 };
 
 // post login

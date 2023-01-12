@@ -59,19 +59,6 @@ router.post("/register", (routerRequest, routerResponse) => {
 router.post("/change-password", (routerRequest, routerResponse) => {
     const { token, newPassword: plainTextPassword } = routerRequest.body;
 
-    if (!plainTextPassword || typeof plainTextPassword !== "string") {
-        routerResponse.send({
-            status: "error",
-            error: "Invalid password",
-        });
-    }
-    if (plainTextPassword.length < 5) {
-        routerResponse.send({
-            status: "error",
-            error: "Password too small. At least 5 characters required",
-        });
-    }
-
     try {
         const user = jwt.verify(token, JWT_SECRET);
         user.password = plainTextPassword;
@@ -83,7 +70,10 @@ router.post("/change-password", (routerRequest, routerResponse) => {
             routerResponse.send(fastApiResponse.data);
         });
     } catch (error) {
-        routerResponse.send({ status: "error", error: "Invalid token" });
+        routerResponse.send({ status: "error", error: {
+            message: "Invalid token",
+            code: 2
+        } });
     }
 });
 
