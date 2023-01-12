@@ -52,7 +52,10 @@ const loginHandler = async (req, res) => {
 
     res.json({
         status: "error",
-        error: "Invalid username or password",
+        error: {
+            message: "Invalid username or password",
+            code: 1
+        },
     });
 };
 

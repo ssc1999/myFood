@@ -36,7 +36,7 @@ router.post("/login", (routerRequest, routerResponse) => {
 
             fastApiResponse.data = {
                 status: "ok",
-                data: token,
+                token: token,
             };
         }
         routerResponse.send(fastApiResponse.data);
