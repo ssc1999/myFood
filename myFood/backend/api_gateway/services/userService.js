@@ -49,6 +49,9 @@ router.post("/register", (routerRequest, routerResponse) => {
     api.post(routerRequest.path, routerRequest.body).then((fastApiResponse) => {
         routerResponse.send(fastApiResponse.data);
         console.log(fastApiResponse.data)
+    }).catch((error) => { 
+        routerResponse.send(error);
+        console.error(error)
     });
 });
 

@@ -32,7 +32,10 @@ const loginHandler = async (req, res) => {
     if (!user) {
         return res.json({
             status: "error",
-            error: "Invalid username or password",
+            error: {
+                message: "Invalid username or password",
+                code: 1
+            },
         });
     }
 
@@ -53,71 +56,83 @@ const loginHandler = async (req, res) => {
     });
 };
 
-const registerHandler = async (req, res) => {
+const validatePassword = (candidatePassword) => candidatePassword.length > 8 && candidatePassword.match(/(\!|@|#|\$|%|\^|&|\*)/g)
+
+const registrationHandler = async (req, res) => {
     const { username, password: plainTextPassword } = req.body;
 
     if (!username || typeof username !== "string") {
         return res.json({
             status: "error",
-            error: "Invalid username",
+            error: {
+                message: "Invalid username",
+                code: 1
+            },
         });
     }
     if (!plainTextPassword || typeof plainTextPassword !== "string") {
         return res.json({
             status: "error",
-            error: "Invalid password",
+            error: {
+                message: "Invalid password",
+                code: 2
+            },
         });
     }
-    if (plainTextPassword.length < 5) {
+    if (!validatePassword(plainTextPassword)) {
         return res.json({
             status: "error",
-            error: "Password too small. At least 5 characters required",
+            error: {
+                message: "Password not long enough or doesn't include special characters.",
+                code: 3
+            },
         });
     }
 
     const password = await bcrypt.hash(plainTextPassword, 10);
 
-    try {
-        const response = await User.create({
-            username,
-            password,
-        });
-        console.log("User created successfully", response);
-    } catch (error) {
-        if (error.code === 11000) {
-            return res.json({
-                status: "error",
-                error: "user alredy registered",
-            });
-        }
-        throw error;
-    }
 
-    res.json({ status: "ok" });
+    const response = await User.create({
+        username,
+        password,
+    }).then(res => ({ status: "ok" })
+    ).catch(err => {
+        console.error(err);
+        if (err.code === 11000) {
+            return {
+                status: "error",
+                error: {
+                    message: "User already exists",
+                    code: 4
+                },
+            };
+        }
+    });
+
+    const data = await response;
+    console.log({ data });
+    res.json(data)
 };
 
 const changePasswordHandler = async (req, res) => {
-    try {
-        console.log(req.body);
-        const _id = req.body.id;
-        const password = await bcrypt.hash(req.body.password, 10);
-        console.log(_id, password);
-        await User.updateOne(
-            { _id },
-            {
-                $set: { password: password },
-            }
-        );
-        res.json({ status: "ok" });
-    } catch (error) {
-        res.json({ status: "error", error: "Invalid token" });
-    }
+
+    console.log(req.body);
+    const _id = req.body.id;
+    const password = await bcrypt.hash(req.body.password, 10);
+    console.log(_id, password);
+    const response = await User.updateOne(
+        { _id },
+        {
+            $set: { password: password },
+        }
+    ).then(res => ({ status: "ok" })
+    ).catch(error => ({ status: "error", error: "Invalid token" }));
 };
 
 // post login
 app.post("/login", loginHandler);
 // post register
-app.post("/register", registerHandler);
+app.post("/register", registrationHandler);
 // post change-password
 app.post("/change-password", changePasswordHandler);
 // listen as default
