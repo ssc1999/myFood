@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<title>myFood</title>
 
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<link rel="icon" type="image/png" href="../images/icons/favicon.ico"/>
+	<link rel="icon" type="image/png" href="../images/icons/favicon.ico" />
 	<link rel="stylesheet" type="text/css" href="../vendor/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="../fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css"
+		href="../fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="../vendor/animate/animate.css">
 	<link rel="stylesheet" type="text/css" href="../vendor/css-hamburgers/hamburgers.min.css">
 	<link rel="stylesheet" type="text/css" href="../vendor/select2/select2.min.css">
@@ -16,25 +18,44 @@
 	<link rel="stylesheet" type="text/css" href="../css/main.css">
 
 </head>
+
 <body>
 	<div class="limiter">
 		<div class="container-index">
-            <div class="index">
-                <h1>myFood</h1>
-                <div class="index-main-btn">
-                    <button class="main-btn">IMC</button>
-                    <button class="main-btn">Food</button>
-                    <button class="main-btn">Recipes</button>
-                </div>
-                <div class="index-down-btn">
-                    <button class="down-btn">Log Out</button>
-                    <button class="down-btn">Change Password</button>
-                </div>
-            </div>
+			<div class="index">
+				<h1>myFood</h1>
+				<div class="index-main-btn">
+					<a href="/imc.html">
+						<button class="main-btn">IMC</button>
+					</a>
+					<a href="/food.html">
+						<button class="main-btn">Food</button>
+					</a>
+					<a href="/recipes.html">
+						<button class="main-btn">Recipes</button>
+					</a>
+				</div>
+				<div class="index-down-btn">
+					<button class="down-btn" id="logout">Log Out</button>
+					<a href="/change-password.html">
+						<button class="down-btn">Change Password</button>
+					</a>
+				</div>
+			</div>
 		</div>
 	</div>
 
-    <!-- ------------------------SCRIPTS------------------------ -->
+	<script>
+		//buton logout on click
+		const logout = document.getElementById('logout');
+
+		logout.addEventListener('click', () => {
+			localStorage.clear();
+			location.href = 'login.html';
+		});
+	</script>
+
+	<!-- ------------------------SCRIPTS------------------------ -->
 	<script src="../vendor/jquery/jquery-3.2.1.min.js"></script>
 
 	<script src="../vendor/bootstrap/js/popper.js"></script>
@@ -43,7 +64,7 @@
 	<script src="../vendor/select2/select2.min.js"></script>
 
 	<script src="../vendor/tilt/tilt.jquery.min.js"></script>
-	<script >
+	<script>
 		$('.js-tilt').tilt({
 			scale: 1.1
 		})
@@ -52,4 +73,5 @@
 	<script src="../js/main.js"></script>
 
 </body>
+
 </html>
