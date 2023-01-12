@@ -41,7 +41,8 @@
 
 					<div class="wrap-input100 validate-input" data-validate="Username is required"
 						id="userBox">
-						<input class="input100" type="text" name="text" placeholder="Username">
+						<input class="input100" type="text" name="text" placeholder="Username"
+							id="username">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-envelope" aria-hidden="true"></i>
@@ -50,7 +51,8 @@
 
 					<div class="wrap-input100 validate-input" data-validate="Password is required"
 						id="passBox">
-						<input class="input100" type="password" name="pass" placeholder="Password">
+						<input class="input100" type="password" name="pass" id="password"
+							placeholder="Password">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-lock" aria-hidden="true"></i>
@@ -58,7 +60,7 @@
 					</div>
 
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn" id="open" type="button">
+						<button class="login100-form-btn" id="submit" type="button">
 							Login
 						</button>
 					</div>
@@ -72,8 +74,8 @@
 				</form>
 				<div id="popup_container" class="popup-container">
 					<div class="popup">
-						<h1>c</h1>
-						<p>c</p>
+						<h4 id="resultH4">c</h4>
+						<p id="resultP">c</p>
 						<button id="close">Close</button>
 					</div>
 				</div>
@@ -81,22 +83,95 @@
 		</div>
 	</div>
 	<script>
-		const open = document.getElementById('open');
+		const submit = document.getElementById('submit');
 		const popup_container = document.getElementById('popup_container');
 		const close = document.getElementById('close');
 
-		open.addEventListener('click', () => {
-			popup_container.classList.add('show');
-			document.getElementById("userBox").style.display = "none";
-			document.getElementById("passBox").style.display = "none";
-		});
-
 		close.addEventListener('click', () => {
 			popup_container.classList.remove('show');
-			document.getElementById("userBox").style.display = "block";
-			document.getElementById("passBox").style.display = "block";
-
 		});
+
+		submit.addEventListener('click', () => {
+			loginUser();
+		});
+
+		// popup_container.classList.add('show');
+
+		async function loginUser() {
+			console.log("loginUser")
+
+			const username = document.getElementById("username").value;
+			const password = document.getElementById("password").value;
+
+			const result = await fetch("/login", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					username,
+					password,
+				})
+			})
+
+			const data = await result.json();
+
+			console.log({ data });
+
+			if (data.status === 'ok') {
+				console.log("Got the token: ", data.token);
+				localStorage.setItem("token", data.token);
+				location.href = 'index.html';
+			} else {
+				const processErrorMessage = (error) => {
+					switch (error.code) {
+						case 1:
+							return "Invalid username or password, please try again"
+						default:
+							return `Unknown error: ${error.code}. ${error.message}`
+					}
+				}
+
+				const title = "Something went wrong"
+				const paragraph = processErrorMessage(data.error)
+
+				document.getElementById("resultH4").innerHTML = title
+				document.getElementById("resultP").innerHTML = paragraph
+
+				popup_container.classList.add('show');
+			}
+
+			// const processErrorMessage = ({ code, message }) => {
+			// 	switch (code) {
+			// 		case 1:
+			// 			return "Invalid username. Please make sure your username doesn't contain any invalid characters like '?, !, <, >, @, #, $, %, *, ^, (, )'."
+			// 		case 2:
+			// 			return "Invalid password. Please make sure your password doesn't contain any invalid characters like '?, !, <, >, @, #, $, %, *, ^, (, )'."
+			// 		case 3:
+			// 			return "Password not long enough or doesn't include special characters."
+			// 		case 4:
+			// 			return "This user alredy exists. Please try to log in or use a different username."
+			// 		default:
+			// 			return `Unknown error: ${code}. ${message}`
+			// 	}
+			// }
+
+			// const isOk = status === 'ok'
+			// const title = isOk
+			// 	? "Register completed successfully"
+			// 	: "Something went wrong"
+
+			// const paragraph = isOk
+			// 	? "To finish the registration process you have to go back to the login page and enter your credentials."
+			// 	: processErrorMessage(error)
+
+			// document.getElementById("resultH4").innerHTML = title
+			// document.getElementById("resultP").innerHTML = paragraph
+
+			// popup_container.classList.add('show');
+		}
+
+
 	</script>
 	<script src="../vendor/jquery/jquery-3.2.1.min.js"></script>
 
