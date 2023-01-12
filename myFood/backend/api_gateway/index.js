@@ -3,16 +3,18 @@ var app = express();
 var router = require("./routers/router");
 var bodyParser = require("body-parser");
 const path = require('path');
-const index = path.join(__dirname, '/', '../../frontend/templates', 'signUp.html' );
+const login = path.join(__dirname, '/', '../../frontend/templates', 'login.html' );
+
 app.use(express.static('../../frontend'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-// const cors = require('cors')
+const cors = require('cors')
+const whiteList = ['http://localhost:5500']
 
-// app.use(cors({ origin: whiteList }))
+app.use(cors({ origin: whiteList }))
 
 app.get("/", (req, res) => {
-    res.sendFile(index);
+    res.sendFile(login);
 });
 
 app.use(router);
