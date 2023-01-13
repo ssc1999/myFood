@@ -23,7 +23,7 @@ const defaultHandler = () => {
 };
 
 // login
-router.post("/login", (routerRequest, routerResponse) => {
+router.post("/api/login", (routerRequest, routerResponse) => {
     api.post(routerRequest.path, routerRequest.body).then((fastApiResponse) => {
         if (fastApiResponse.data.status === "ok") {
             const token = jwt.sign(
@@ -44,7 +44,7 @@ router.post("/login", (routerRequest, routerResponse) => {
 });
 
 // register
-router.post("/register", (routerRequest, routerResponse) => {
+router.post("/api/register", (routerRequest, routerResponse) => {
     console.log("register")
     api.post(routerRequest.path, routerRequest.body).then((fastApiResponse) => {
         routerResponse.send(fastApiResponse.data);
@@ -56,7 +56,7 @@ router.post("/register", (routerRequest, routerResponse) => {
 });
 
 // change password
-router.post("/change-password", (routerRequest, routerResponse) => {
+router.post("/api/change-password", (routerRequest, routerResponse) => {
     const { token, newPassword: plainTextPassword } = routerRequest.body;
 
     try {

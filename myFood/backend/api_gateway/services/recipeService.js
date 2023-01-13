@@ -44,14 +44,14 @@ const api = apiAdapter(BASE_URL);
 // router.get(paths.allRecipes, makeHandler("get", returnAllRecipes));
 
 // get all recipes
-router.get("/recipes", (routerRequest, routerResponse) => {
+router.get("/api/recipes", (routerRequest, routerResponse) => {
     api.get(routerRequest.path).then((fastApiResponse) => {
         routerResponse.send(fastApiResponse.data);
     });
 });
 
 // get a recipe by id
-router.get("/recipe/*", (routerRequest, routerResponse) => {
+router.get("/api/recipe/*", (routerRequest, routerResponse) => {
     console.log(routerRequest.path);
     api.get(routerRequest.path).then((fastApiResponse) => {
         console.log(fastApiResponse.data);
@@ -60,7 +60,7 @@ router.get("/recipe/*", (routerRequest, routerResponse) => {
 });
 
 // post a recipe
-router.post("/recipes", (routerRequest, routerResponse) => {
+router.post("/api/recipes", (routerRequest, routerResponse) => {
     console.log(routerRequest.body);
     api.post(routerRequest.path, routerRequest.body).then((fastApiResponse) => {
         console.log(fastApiResponse.data);
@@ -69,7 +69,7 @@ router.post("/recipes", (routerRequest, routerResponse) => {
 });
 
 // delete a recipe by id
-router.delete("/recipe/*", (routerRequest, routerResponse) => {
+router.delete("/api/recipe/*", (routerRequest, routerResponse) => {
     console.log(routerRequest.path);
     api.get(routerRequest.path).then((fastApiResponse) => {
         console.log(fastApiResponse.data);

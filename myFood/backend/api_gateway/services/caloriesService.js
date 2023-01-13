@@ -8,7 +8,7 @@ const api = apiAdapter(BASE_URL);
 
 // not done yet
 // post calories
-router.post("/calories", (routerRequest, routerResponse) => {
+router.post("/api/calories", (routerRequest, routerResponse) => {
     console.log(routerRequest.body);
     api.post(routerRequest.path, routerRequest.body).then((fastApiResponse) => {
         console.log(fastApiResponse.data);
