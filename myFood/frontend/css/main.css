@@ -371,6 +371,60 @@ iframe {
   justify-content: space-between;
 }
 
+.displayResult{
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  border: 4px black solid;
+  border-radius: 10px;
+  padding: 15px 10px 15px 10px;
+  margin-top: -50px;
+}
+
+.blue{
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  border: 4px black solid;
+  border-radius: 10px;
+  padding: 15px 10px 15px 10px;
+  margin-top: -50px;
+  background-color: rgb(0, 174, 255);
+}
+
+.green{
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  border: 4px black solid;
+  border-radius: 10px;
+  padding: 15px 10px 15px 10px;
+  margin-top: -50px;
+  background-color: #11ff00;
+}
+
+.yellow{
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  border: 4px black solid;
+  border-radius: 10px;
+  padding: 15px 10px 15px 10px;
+  margin-top: -50px;
+  background-color: yellow;
+}
+
+.red{
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  border: 4px black solid;
+  border-radius: 10px;
+  padding: 15px 10px 15px 10px;
+  margin-top: -50px;
+  background-color: #ff0000;
+}
+
 #sex-radio{
   justify-content: space-evenly;
 }
@@ -427,8 +481,11 @@ iframe {
 }
 
 .white-box .index-down-btn{
-  margin-top: -50px;
+  /* margin-top: -50px;
+  margin-left: -500px; */
+  margin-top: 370px;
   margin-left: -500px;
+  position: absolute;
 }
 
 .white-box .index-down-btn .down-btn{

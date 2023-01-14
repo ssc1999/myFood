@@ -23,7 +23,7 @@
 	<div class="limiter">
 		<div class="container-index">
 			<div class="white-box">
-				<h2>Calculate your IMC!</h2>
+				<h2>Calculate your BMI!</h2>
 				<form class="imc-form" id="myForm">
 					<div class="form-line">
 						<label>Height:</label>
@@ -52,10 +52,11 @@
 							<!-- <label for="female">Female</label> -->
 						</div>
 					</div>
-					<button type="submit" value="Submit" id="submit" />Calculate</button>
+					<button type="button" value="Submit" id="submit" />Calculate</button>
 				</form>
-				<div id="displayResult">
-					<h3>h</h3>
+				<div class="display-result" id="displayResult">
+					<h4 id="imcNumber"></h4>
+					<h4 id="imcString"></h4>
 				</div>
 				<div class="index-down-btn">
 					<a href="/index.html">
@@ -68,32 +69,21 @@
 	<script>
 		const submit = document.getElementById('submit');
 		const displayResult = document.getElementById('displayResult');
-		var div = document.createElement('div');
-		div.className('result');
-		var h3 = document.createElement('h3');
-		h3.innerHTML = "h";
-		var h32 = document.createElement('h3');
-		h32.innerHTML = "j";
 
 		submit.addEventListener('click', () => {
 			imc();
-			div.innerHTML = `
-					<h3>s</h3>
-					<h3 id="type">sss</h3>
-				`
-			displayResult.appendChild(div);
 		});
 
-		async function imc(event) {
+		async function imc() {
 
 			const height = document.getElementById('height').value;
 			const weight = document.getElementById('weight').value;
 			const age = document.getElementById('age').value;
-			const sex = document.getElementById('sex-radio').value;
+			const sex = document.querySelector('input[name="sex"]:checked').value;
 
 			console.log(height, weight, age, sex);
 
-			const result = await fetch("/api/imc", {
+			const result = await fetch("/api/calories", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
@@ -106,10 +96,70 @@
 				})
 			})
 
-			const total = await result.json();
+			const data = await result.json();
+			const total = parseFloat(data.total).toFixed(2);
+			console.log(total);
+			var totalCategory = undefined;
 
-
-
+			switch (true) {
+				case (total < 18.50):
+					totalCategory = "Under weight"
+					displayResult.classList.remove("green");
+					displayResult.classList.remove("red");
+					displayResult.classList.remove("blue");
+					displayResult.classList.remove("yellow");
+					displayResult.classList.add("blue");
+					break;
+				case ((total >= 18.50) && (total < 24.99)):
+					totalCategory = "Normal"
+					displayResult.classList.remove("green");
+					displayResult.classList.remove("red");
+					displayResult.classList.remove("blue");
+					displayResult.classList.remove("yellow");
+					displayResult.classList.add("green");
+					break;
+				case ((total >= 24.99) && (total < 29.99)):
+					totalCategory = "Over weight"
+					displayResult.classList.remove("green");
+					displayResult.classList.remove("red");
+					displayResult.classList.remove("blue");
+					displayResult.classList.remove("yellow");
+					displayResult.classList.add("yellow");
+					break;
+				case ((total >= 29.99) && (total < 34.99)):
+					totalCategory = "Obesity I"
+					displayResult.classList.remove("green");
+					displayResult.classList.remove("red");
+					displayResult.classList.remove("blue");
+					displayResult.classList.remove("yellow");
+					displayResult.classList.add("red");
+					break;
+				case ((total >= 34.99) && (total < 39.99)):
+					totalCategory = "Obesity II"
+					displayResult.classList.remove("green");
+					displayResult.classList.remove("red");
+					displayResult.classList.remove("blue");
+					displayResult.classList.remove("yellow");
+					displayResult.classList.add("red");
+					break;
+				case (total >= 39.99):
+					totalCategory = "Obesity III"
+					displayResult.classList.remove("green");
+					displayResult.classList.remove("red");
+					displayResult.classList.remove("blue");
+					displayResult.classList.remove("yellow");
+					displayResult.classList.add("red");
+					break;
+				default:
+					totalCategory = "Error"
+					displayResult.classList.remove("green");
+					displayResult.classList.remove("red");
+					displayResult.classList.remove("blue");
+					displayResult.classList.remove("yellow");
+					displayResult.classList.add("red");
+			}
+			document.getElementById("imcNumber").innerHTML = total
+			document.getElementById("imcString").innerHTML = totalCategory
 		}
 
 	</script>
