@@ -16,7 +16,7 @@ async def check_calories(calories: Calories):
         total = 655 + (9.6 * calories.weight) + \
             (1.8 * calories.height) - (4.7 * calories.age)
     elif (calories.gender == Gender.male):
-        total = 66 + (13.7 * calories.weight) + \
-            (5 * calories.height) - (6.5 * calories.age)
+        total = (66 + (13.7 * calories.weight) +
+                 (5 * calories.height) - (6.5 * calories.age))/100
 
     return {"total": total}
