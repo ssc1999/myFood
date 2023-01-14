@@ -6,6 +6,7 @@ const foodPlaceholder = document.getElementById('foodPlaceholder');
 const foodDetailsPlaceholder = document.getElementById('foodDetailsPlaceholder');
 
 close.addEventListener('click', () => {
+    popup_content.innerHTML = "";
     popup_container.classList.remove('show');
 });
 

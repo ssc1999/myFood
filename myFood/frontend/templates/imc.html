@@ -24,7 +24,7 @@
 		<div class="container-index">
 			<div class="white-box">
 				<h2>Calculate your IMC!</h2>
-				<form class="imc-form">
+				<form class="imc-form" id="myForm">
 					<div class="form-line">
 						<label>Height:</label>
 						<input type="text" id="height" placeholder="cm" class="box" />
@@ -52,11 +52,10 @@
 							<!-- <label for="female">Female</label> -->
 						</div>
 					</div>
-					<button type="submit" value="Submit" />Calculate</button>
+					<button type="submit" value="Submit" id="submit" />Calculate</button>
 				</form>
-				<div class="result">
-					<h3>15.4</h3>
-					<h3 id="type">Moderate</h3>
+				<div id="displayResult">
+					<h3>h</h3>
 				</div>
 				<div class="index-down-btn">
 					<a href="/index.html">
@@ -66,7 +65,54 @@
 			</div>
 		</div>
 	</div>
+	<script>
+		const submit = document.getElementById('submit');
+		const displayResult = document.getElementById('displayResult');
+		var div = document.createElement('div');
+		div.className('result');
+		var h3 = document.createElement('h3');
+		h3.innerHTML = "h";
+		var h32 = document.createElement('h3');
+		h32.innerHTML = "j";
 
+		submit.addEventListener('click', () => {
+			imc();
+			div.innerHTML = `
+					<h3>s</h3>
+					<h3 id="type">sss</h3>
+				`
+			displayResult.appendChild(div);
+		});
+
+		async function imc(event) {
+
+			const height = document.getElementById('height').value;
+			const weight = document.getElementById('weight').value;
+			const age = document.getElementById('age').value;
+			const sex = document.getElementById('sex-radio').value;
+
+			console.log(height, weight, age, sex);
+
+			const result = await fetch("/api/imc", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					age: age,
+					weight: weight,
+					height: height,
+					gender: sex,
+				})
+			})
+
+			const total = await result.json();
+
+
+
+		}
+
+	</script>
 	<!-- ------------------------SCRIPTS------------------------ -->
 	<script src="../vendor/jquery/jquery-3.2.1.min.js"></script>
 
