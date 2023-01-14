@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>myFood</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" type="image/png" href="../images/icons/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="../vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="../fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="../vendor/animate/animate.css">
+    <link rel="stylesheet" type="text/css" href="../vendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css" href="../vendor/select2/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/util.css">
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
+
+</head>
+
+<body>
+    <div class="limiter">
+        <div class="container-index">
+            <div class="white-box">
+                <h2>Find by ingredient!</h2>
+                <div class="food-search" id="foodSearch">
+                    <input type="text" class="box" id="foodSearchInput" placeholder="Apple">
+                    <button type="button" value="submit" id="submit">Search</button>
+                </div>
+                <div class="food-table" id="foodTable">
+                </div>
+
+                <div class="index-down-btn">
+                    <a href="/index.html">
+                        <button class="down-btn">Go Back</button>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div id="popupContainer" class="popup-container">
+        <div class="popup">
+            <div class="popup-content" id="popupContent"></div>
+            <button id="close">Close</button>
+        </div>
+    </div>
+    <div class="food-placeholder" id="foodPlaceholder">
+        <div id="foodPlaceholderContent">
+            <h4 id="foodName"></h4>
+        </div>
+    </div>
+
+    <div class="food-details-placeholder" id="foodDetailsPlaceholder">
+        <div class="food-details-placeholder-left">
+            <div id="foodKcals"></div>
+            <div id="foodCarbs"></div>
+            <div id="foodProtein"></div>
+            <div id="foodFat"></div>
+        </div>
+        <div class="food-details-placeholder-right">
+            <img id="foodImage" src="" />
+        </div>
+    </div>
+    <!-- ------------------------SCRIPTS------------------------ -->
+
+    <script src="../js/food.js" />
+
+    <script src="../vendor/jquery/jquery-3.2.1.min.js" />
+
+    <script src="../vendor/bootstrap/js/popper.js" />
+    <script src="../vendor/bootstrap/js/bootstrap.min.js" />
+
+    <script src="../vendor/select2/select2.min.js" />
+
+    <script src="../vendor/tilt/tilt.jquery.min.js" />
+    <script>
+        $('.js-tilt').tilt({
+            scale: 1.1
+        })
+    </script>
+
+    <script src="../js/main.js" />
+
+</body>
+
+</html>

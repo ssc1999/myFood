@@ -264,6 +264,106 @@ iframe {
   margin-top: -50px;
 }
 
+.food-search{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-top: -40px;
+}
+
+.food-search button{
+  display: flex;
+  border-radius: 10px;
+  padding: 5px;
+  border: 1px black solid;
+  background: #01d62f;
+}
+
+.food-search button:hover {
+  background: #11ff00;
+}
+.food-search input[type="text"]{
+  display: flex;
+  border-radius: 10px;
+  padding: 5px;
+  border: 1px black solid;
+}
+
+.food-table{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 10px;
+  margin-top: -40px;
+  overflow: auto;
+  min-height: 270px;
+  height: 100%;
+  min-width: 450px;
+  flex: 1 1 100%;
+}
+
+/* .food-label{
+  flex
+} */
+
+.food-container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 20px;
+  padding: .5rem;
+  border: 1px black solid;
+  border-radius: 10px;
+  justify-content:space-between;
+  cursor: pointer;
+}
+.food-container :hover{
+  /* background: #999999; */
+}
+
+
+.food-container-link{
+  display: block;
+  height: 100%;
+  width: 100%;
+  text-decoration: none !important;;
+}
+
+.food-placeholder{
+  opacity: 0;
+}
+
+.food-placeholder h4{
+  font-size: 25px;
+}
+
+.food-details-placeholder{
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  font-size: 30px;
+  margin-top: 20px;
+}
+
+
+
+.food-details-placeholder-left{
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+  min-height: 200px;
+  font-size: 20px;
+  justify-content: space-evenly;
+  align-items: flex-start;
+}
+
+.food-details-placeholder-right{
+  display: flex;
+  flex-direction: column;
+  max-height: 200px;
+  max-width: 200px;
+}
+
 .form-line{
   display: flex;
   flex-direction: row;
@@ -710,17 +810,17 @@ iframe {
   justify-content: center;
   position: fixed;
   pointer-events: none;
-  opacity: 0;  
   top: 0;
   left: 0;
   height: 100vh;
   width: 100vw;
+  opacity: 0;
   transition: opacity 0.3s ease;
 }
 
 .show {
   pointer-events: auto;
-  opacity: 0.97;
+  opacity: 1;
 }
 
 .popup {
@@ -735,7 +835,7 @@ iframe {
   flex-flow: column nowrap;
   align-items: center;
   justify-content: center;
-
+  gap: 25px;
 }
 
 .popup h4 {
@@ -744,6 +844,13 @@ iframe {
 
 .popup p {
   flex: auto;
+}
+
+.popup button{
+  border-radius: 10px;
+  background: #f90057;
+  border: 2px black solid;
+  padding: 2px 3px 2px 3px;
 }
 
 .close {
