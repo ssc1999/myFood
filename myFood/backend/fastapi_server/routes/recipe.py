@@ -11,26 +11,26 @@ from bson import ObjectId
 recipe = APIRouter()
 
 
-@recipe.get("/recipes", tags=["Recipe"])
+@recipe.get("/api/recipes", tags=["Recipe"])
 async def find_all_recipe():
     print(conn.myfood.recipe.find())
     print(recipeListEntity(conn.myfood.recipe.find()))
     return recipeListEntity(conn.myfood.recipe.find())
 
 
-@recipe.get("/recipe/{id}", tags=["Recipe"])
+@recipe.get("/api/recipe/{id}", tags=["Recipe"])
 async def get_recipe(id):
     print(recipeEntity(conn.myfood.recipe.find_one({"_id": ObjectId(id)})))
     return recipeEntity(conn.myfood.recipe.find_one({"_id": ObjectId(id)}))
 
 
-@recipe.post("/recipes", tags=["Recipe"])
+@recipe.post("/api/recipes", tags=["Recipe"])
 async def add_recipe(recipe: Recipe):
     conn.myfood.recipe.insert_one(dict(recipe))
     return "Added recipe: " + recipe.tittle
 
 
-@recipe.delete("/recipe/{id}", tags=["Recipe"])
+@recipe.delete("/api/recipe/{id}", tags=["Recipe"])
 async def delete_recipe(id):
     conn.myfood.recipe.find_one_and_delete({"_id": ObjectId(id)})
     return "Deleted recipe with id: " + id

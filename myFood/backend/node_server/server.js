@@ -154,10 +154,10 @@ const changePasswordHandler = async (req, res) => {
 };
 
 // post login
-app.post("/login", loginHandler);
+app.post("/api/login", loginHandler);
 // post register
-app.post("/register", registrationHandler);
+app.post("/api/register", registrationHandler);
 // post change-password
-app.post("/change-password", changePasswordHandler);
+app.post("/api/change-password", changePasswordHandler);
 // listen as default
 app.listen(5000, defaultHandler);

@@ -11,30 +11,30 @@ from bson import ObjectId
 food = APIRouter()
 
 
-@food.get("/food", tags=["Food"])
+@food.get("/api/food", tags=["Food"])
 async def find_all_food():
     print(conn.myfood.food.find())
     print(foodListEntity(conn.myfood.food.find()))
     return foodListEntity(conn.myfood.food.find())
 
 
-@food.get("/food/search/", tags=["Food"])
+@food.get("/api/food/search/", tags=["Food"])
 async def search_food(name: str):
     return foodListEntity(conn.myfood.food.find({"name": name}))
 
 
-@food.get("/food/{id}", tags=["Food"])
+@food.get("/api/food/{id}", tags=["Food"])
 async def get_food(id):
     return foodEntity(conn.myfood.food.find_one({"_id": ObjectId(id)}))
 
 
-@food.post("/food", tags=["Food"])
+@food.post("/api/food", tags=["Food"])
 async def add_food(food: Food):
     conn.myfood.food.insert_one(dict(food))
     return "Added food: " + food.name
 
 
-@food.delete("/food/{id}", tags=["Food"])
+@food.delete("/api/food/{id}", tags=["Food"])
 async def delete_food(id):
     conn.myfood.food.find_one_and_delete({"_id": ObjectId(id)})
     return "Deleted food with id: " + id

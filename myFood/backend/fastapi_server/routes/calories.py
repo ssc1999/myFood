@@ -9,7 +9,7 @@ from models.calories import Calories
 calories = APIRouter()
 
 
-@calories.post("/calories", tags=["Calories"])
+@calories.post("/api/calories", tags=["Calories"])
 async def check_calories(calories: Calories):
 
     if (calories.gender == Gender.female):
