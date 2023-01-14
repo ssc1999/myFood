@@ -48,7 +48,6 @@ function makeFoodDetailsPlaceholder(foodData) {
     if (foodData.image != undefined) {
         clone.querySelector("#foodImage").src = foodData.image;
     }
-    // TODO: Add content
 
     return clone;
 }
@@ -107,33 +106,6 @@ function updatePopUp(element) {
     popup_content.append(element);
     popup_container.classList.add("show");
 }
-
-//         0:food:
-// foodId:"food_a1gb9ubb72c7snbuxr3weagwv0dd"
-// uri:"http://www.edamam.com/ontologies/edamam.owl#Food_apple"
-// label:"Apple"
-// nutrients:
-// ENERC_KCAL:52
-// PROCNT:0.26
-// FAT:0.17
-// CHOCDF:13.81
-// FIBTG:2.4
-// category:"Generic foods"
-// categoryLabel:"food"
-// image:"https://www.edamam.com/food-img/42c/42c006401027d35add93113548eeaae6.jpg"0:food:
-// foodId:"food_a1gb9ubb72c7snbuxr3weagwv0dd"
-// uri:"http://www.edamam.com/ontologies/edamam.owl#Food_apple"
-// label:"Apple"
-// nutrients:
-// ENERC_KCAL:52
-// PROCNT:0.26
-// FAT:0.17
-// CHOCDF:13.81
-// FIBTG:2.4
-// category:"Generic foods"
-// categoryLabel:"food"
-// image:"https://www.edamam.com/food-img/42c/42c006401027d35add93113548eeaae6.jpg"
-// popup_container.classList.add('show');
 
 async function getFood() {
     const foodName = document.getElementById("foodSearchInput").value;
