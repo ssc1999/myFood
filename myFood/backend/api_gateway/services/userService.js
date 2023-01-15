@@ -61,6 +61,7 @@ router.post("/api/change-password", (routerRequest, routerResponse) => {
 
     try {
         const user = jwt.verify(token, JWT_SECRET);
+        console.log({user});
         user.password = plainTextPassword;
 
         console.log("JWT decoded: ", user);
@@ -77,9 +78,9 @@ router.post("/api/change-password", (routerRequest, routerResponse) => {
     }
 });
 
-const detokenize = (token) => {
-    user = jwt.verify(token, JWT_SECRET);
-    return user;
-};
+// export function detokenize (token){
+//     user = jwt.verify(token, JWT_SECRET);
+//     return user;
+// };
 
 module.exports = router;

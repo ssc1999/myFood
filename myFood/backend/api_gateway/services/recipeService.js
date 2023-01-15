@@ -5,6 +5,9 @@ const apiAdapter = require("../routers/apiAdapter");
 const paths = require("./paths");
 const BASE_URL = "http://127.0.0.1:8000";
 const api = apiAdapter(BASE_URL);
+const jwt = require("jsonwebtoken");
+const JWT_SECRET = "lksjdafos;dh#@$!@%HAWHDNF";
+
 
 // connects with fastapi
 // const makeHandler = (method, callback) => (routerRequest, routerResponse) => {
@@ -44,8 +47,17 @@ const api = apiAdapter(BASE_URL);
 // router.get(paths.allRecipes, makeHandler("get", returnAllRecipes));
 
 // get all recipes
-router.get("/api/recipes", (routerRequest, routerResponse) => {
+router.get("/api/allrecipes", (routerRequest, routerResponse) => {
     api.get(routerRequest.path).then((fastApiResponse) => {
+        routerResponse.send(fastApiResponse.data);
+    });
+});
+
+// get a recipes by user
+router.get("/api/recipes/", (routerRequest, routerResponse) => {
+    const user = jwt.verify(routerRequest.headers.user, JWT_SECRET);
+    routerRequest.headers.user = user.username;
+    api.get(routerRequest.path + "?user=" +routerRequest.headers.user).then((fastApiResponse) => {
         routerResponse.send(fastApiResponse.data);
     });
 });
