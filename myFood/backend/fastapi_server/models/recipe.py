@@ -10,7 +10,8 @@ class Ingredients(NamedTuple):
 
 
 class Recipe(BaseModel):
-    tittle: str
-    link: str
+    user: str
+    title: str
+    date: str
     description: str
     ingredients: list[Ingredients]
