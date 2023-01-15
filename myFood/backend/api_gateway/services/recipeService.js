@@ -56,8 +56,8 @@ router.get("/api/allrecipes", (routerRequest, routerResponse) => {
 // get a recipes by user
 router.get("/api/recipes/", (routerRequest, routerResponse) => {
     const user = jwt.verify(routerRequest.headers.user, JWT_SECRET);
-    routerRequest.headers.user = user.username;
-    api.get(routerRequest.path + "?user=" +routerRequest.headers.user).then((fastApiResponse) => {
+
+    api.get(routerRequest.path + "?user=" +user.username).then((fastApiResponse) => {
         routerResponse.send(fastApiResponse.data);
     });
 });
@@ -73,9 +73,11 @@ router.get("/api/recipe/*", (routerRequest, routerResponse) => {
 
 // post a recipe
 router.post("/api/recipes", (routerRequest, routerResponse) => {
-    console.log(routerRequest.body);
+    const user = jwt.verify(routerRequest.body.user, JWT_SECRET)
+    routerRequest.body.user = user.username;
+
     api.post(routerRequest.path, routerRequest.body).then((fastApiResponse) => {
-        console.log(fastApiResponse.data);
+        // console.log(fastApiResponse.data);
         routerResponse.send(fastApiResponse.data);
     });
 });

@@ -31,10 +31,10 @@ async def get_recipes(user: str):
 @recipe.post("/api/recipes", tags=["Recipe"])
 async def add_recipe(recipe: Recipe):
     conn.myfood.recipe.insert_one(dict(recipe))
-    return "Added recipe: " + recipe.title
+    return {"status": "ok"}
 
 
 @recipe.delete("/api/recipe/{id}", tags=["Recipe"])
 async def delete_recipe(id):
     conn.myfood.recipe.find_one_and_delete({"_id": ObjectId(id)})
-    return "Deleted recipe with id: " + id
+    return {"status": "ok"}

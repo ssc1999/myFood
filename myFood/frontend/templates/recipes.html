@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>myFood</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" type="image/png" href="../images/icons/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="../vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="../fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="../vendor/animate/animate.css">
+    <link rel="stylesheet" type="text/css" href="../vendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css" href="../vendor/select2/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/util.css">
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
+
+</head>
+
+<body>
+    <div class="limiter">
+        <div class="container-index">
+            <div class="white-box">
+                <h2>Find by recipes!</h2>
+                <div class="recipe-table" id="recipeTable">
+                </div>
+                <div class="index-down-btn">
+                    <a href="/index.html">
+                        <button class="down-btn">Go Back</button>
+                    </a>
+                </div>
+                <button class="addRecipeButton" id="addRecipeButton">Add Recipe</button>
+            </div>
+        </div>
+    </div>
+    <div id="popupContainer" class="popup-container">
+        <div class="popup">
+            <h4>Add your new recipe!</h4>
+            <div class="recipe-form">
+                <div class="ingredient">
+                    <label>Title: </label>
+                    <input type="text" id="recipeTitle" class="box" />
+                </div>
+                <div class="ingredient">
+                    <label>Ingredients:</label>
+                    <div class="ingredients">
+                        <div class="ingredient">
+                            <input type="text" id="ingredientTitle0" class="box ingredientTitle"
+                                placeholder="Ingredient 1" />
+                            <input type="text" id="ingredientQuantity0" class="box ingredientNumber"
+                                placeholder="gr" />
+                        </div>
+                        <div class="ingredient">
+                            <input type="text" id="ingredientTitle1" class="box ingredientTitle"
+                                placeholder="Ingredient 2" />
+                            <input type="text" id="ingredientingredientQuantity1"
+                                class="box ingredientNumber" placeholder="gr" />
+                        </div>
+                        <div class="ingredient">
+                            <input type="text" id="ingredientTitle2" class="box ingredientTitle"
+                                placeholder="Ingredient 3" />
+                            <input type="text" id="ingredientQuantity2" class="box ingredientNumber"
+                                placeholder="gr" />
+                        </div>
+                        <div class="ingredient">
+                            <input type="text" id="ingredientTitle3" class="box ingredientTitle"
+                                placeholder="Ingredient 4" />
+                            <input type="text" id="ingredientQuantity3" class="box ingredientNumber"
+                                placeholder="gr" />
+                        </div>
+                        <div class="ingredient">
+                            <input type="text" id="ingredientTitle4" class="box ingredientTitle"
+                                placeholder="Ingredient 5" />
+                            <input type="text" id="ingredientQuantity4" class="box ingredientNumber"
+                                placeholder="gr" />
+                        </div>
+                        <div class="ingredient">
+                            <input type="text" id="ingredientTitle5" class="box ingredientTitle"
+                                placeholder="Ingredient 6" />
+                            <input type="text" id="ingredientQuantity5" class="box ingredientNumber"
+                                placeholder="gr" />
+                        </div>
+                        <div class="ingredient">
+                            <input type="text" id="ingredientTitle6" class="box ingredientTitle"
+                                placeholder="Ingredient 7" />
+                            <input type="text" id="ingredientQuantity6" class="box ingredientNumber"
+                                placeholder="gr" />
+                        </div>
+                        <div class="ingredient">
+                            <input type="text" id="ingredientTitle7" class="box ingredientTitle"
+                                placeholder="Ingredient 8" />
+                            <input type="text" id="ingredientQuantity7" class="box ingredientNumber"
+                                placeholder="gr" />
+                        </div>
+                        <div class="ingredient">
+                            <input type="text" id="ingredientTitlr8" class="box ingredientTitle"
+                                placeholder="Ingredient 9" />
+                            <input type="text" id="ingredientQuantity8" class="box ingredientNumber"
+                                placeholder="gr" />
+                        </div>
+                        <div class="ingredient">
+                            <input type="text" id="ingredientTitle9" class="box ingredientTitle"
+                                placeholder="Ingredient 10" />
+                            <input type="text" id="ingredientQuantity9" class="box ingredientNumber"
+                                placeholder="gr" />
+                        </div>
+                    </div>
+                </div>
+                <div class="ingredient">
+                    <label>Description:</label>
+                    <textarea name="description" id="recipeDescription" cols="40"
+                        rows="7"></textarea>
+                </div>
+            </div>
+            <div class="recipe-buttons">
+                <button id="close">Close</button>
+                <button id="submitRecipe">Add Recipe</button>
+            </div>
+        </div>
+        <div id="popup_container_Error" class="popup-container">
+            <div class="popup">
+                <h4 id="resultH4"></h4>
+                <p id="resultP"></p>
+                <button id="closeError">Close</button>
+            </div>
+        </div>
+    </div>
+    <div class="recipe-placeholder" id="recipePlaceholder">
+        <div id="recipePlaceholderContent">
+            <h4 id="recipeName"></h4>
+        </div>
+    </div>
+    <div class="recipe-details-placeholder" id="recipeDetailsPlaceholder">
+        <div class="recipe-details-placeholder-left">
+            <div id="recipeIngredientsTitle"></div>
+            <div id="recipeIngredients"></div>
+            <div id="recipeDescriptionTitle"></div>
+            <div id="recipeDescription"></div>
+
+        </div>
+    </div>
+    <!-- ------------------------SCRIPTS------------------------ -->
+
+    <script src="../js/recipes.js" />
+
+    <script src="../vendor/jquery/jquery-3.2.1.min.js" />
+
+    <script src="../vendor/bootstrap/js/popper.js" />
+    <script src="../vendor/bootstrap/js/bootstrap.min.js" />
+
+    <script src="../vendor/select2/select2.min.js" />
+
+    <script src="../vendor/tilt/tilt.jquery.min.js" />
+    <script>
+        $('.js-tilt').tilt({
+            scale: 1.1
+        })
+    </script>
+
+    <script src="../js/main.js" />
+
+</body>
+
+</html>
