@@ -127,18 +127,46 @@
             </div>
         </div>
     </div>
-    <div class="recipe-placeholder" id="recipePlaceholder">
-        <div id="recipePlaceholderContent">
-            <h4 id="recipeName"></h4>
+    <div class="recipe-details-placeholder" id="recipeDetailsPlaceholder">
+        <div id="recipeName"></div>
+        <div id="recipeIngredientsTitle">Ingredients</div>
+        <div id="recipeIngredients">
+            <div class="ingredient-container">
+                <div class="ingredient-name"></div>
+                <div class="ingredient-grams"></div>
+            </div>
+        </div>
+        <div id="recipeDescriptionTitle">Description</div>
+        <div id="recipeDescription"></div>
+    </div>
+    <div id="add-recipe">
+        <form id="add-recipe-form">
+            <label for="title">Title
+                <input type="text" name="title">
+            </label>
+            <div class="add-recipe-ingredients">
+                <div class="ingredient-row" id="ingredient-row">
+                    <label for="ingredient">Ingredient
+                        <input type="text" name="ingredient">
+                    </label>
+                    <label for="grams">Grams
+                        <input type="text" name="grams">
+                    </label>
+                </div>
+                <div id="add-recipe-add-ingredient">Add Ingredient</div>
+            </div>
+            <label for="description">Description
+                <input type="textarea" name="description" id="textAreaForm">
+            </label>
+        </form>
+        <div class="add-recipe-form-controls">
+            <div id="add-recipe-form-submit">Submit</div>
         </div>
     </div>
-    <div class="recipe-details-placeholder" id="recipeDetailsPlaceholder">
-        <div class="recipe-details-placeholder-left">
-            <div id="recipeIngredientsTitle"></div>
-            <div id="recipeIngredients"></div>
-            <div id="recipeDescriptionTitle"></div>
-            <div id="recipeDescription"></div>
-
+    <div id="modal">
+        <div class="modal-wrapper">
+            <div id="modal-content"></div>
+            <button id="modal-close">X</button>
         </div>
     </div>
     <!-- ------------------------SCRIPTS------------------------ -->

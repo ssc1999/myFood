@@ -432,9 +432,9 @@ iframe {
 
 .recipe-details-placeholder{
   display: flex;
-  flex-direction: row;
-  gap: 30px;
-  font-size: 30px;
+  flex-direction: column;
+  gap: 20px;
+  /* font-size: 30px; */
   margin-top: 20px;
 }
 
@@ -483,7 +483,7 @@ iframe {
 .ingredientNumber{
   max-width: 50px;
 }
-#recipeDescription{
+#recipeDescription, #textAreaForm{
   border: 2px black solid;
   font-size: 12px;
 }
@@ -1103,12 +1103,15 @@ iframe {
 
 .modal-wrapper {
   position: relative;
+  
 }
 
 .modal-wrapper,
 #modal-content,
 #modal-close {
   display: flex;
+  width: 600px;
+  max-height: 800px;
 }
 
 .modal-wrapper 
@@ -1150,4 +1153,61 @@ iframe {
 
 #add-recipe.add-recipe-show {
   position: static;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#add-recipe-add-ingredient, #add-recipe-form-submit:hover{
+  cursor: pointer;
+}
+
+.ingredient-container{
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  margin-left: 30px;
+  font-size: 15px;
+}
+
+#recipeName{
+  font-size: 40px;
+}
+
+.addRecipeButton{
+  font-size: 15px;
+  line-height: 1.5;
+  color: rgb(0, 0, 0);
+  padding: 4px;
+  max-height: 55px;
+  border-radius: 10px;
+  background: #01d62f;
+  margin-top: -35px;
+  border: 2px black solid;
+}
+
+
+.addRecipeButton button:hover {
+  background: #11ff00;
+}
+
+#add-recipe-form-submit{
+  font-size: 15px;
+  line-height: 1.5;
+  color: rgb(0, 0, 0);
+  padding: 4px;
+  max-height: 55px;
+  border-radius: 10px;
+  background: #01d62f;
+  border: 2px black solid;
+}
+
+#add-recipe-form-submit:hover{
+  background: #11ff00;  
+}
+
+#modal-content{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
