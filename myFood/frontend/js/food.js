@@ -29,7 +29,7 @@ function showFoodDetails(foodId, foodName) {
 
 function makeFoodDetailsPlaceholder(foodData) {
     const clone = foodDetailsPlaceholder.cloneNode(true);
-    
+    clone.id = foodData.foodId
     if (foodData.nutrients.ENERC_KCAL != undefined) {
         clone.querySelector("#foodKcals").textContent = "Energy: " + parseFloat(foodData.nutrients.ENERC_KCAL).toFixed(2) + "kcal";
     }
