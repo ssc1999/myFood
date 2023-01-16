@@ -90,7 +90,10 @@ We will divide this section in three different command terminals. In the first o
 ```sh
 localhost:3000/login.html
 ```
-  ![alt text](https://github.com/ssc1999/myFood/tree/main/demo_pics/login.png?raw=true)
+<p align="center">
+<img src="/demo_pics/login.png" alt="login-picture" title="login" width="50%" height="50%">
+</p>
+  
 ### Built With
 
 This section includes languages, frameworks and libraries used in this project.
